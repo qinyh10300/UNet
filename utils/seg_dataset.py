@@ -46,10 +46,13 @@ class CustomSegmentationDataset(Dataset):
             mask = self.target_transform(mask)
 
         image_array = np.array(image)
+        image_array = np.transpose(image_array, (2, 0, 1))
         mask_array = np.array(mask)
 
-        if len(image_array.shape) == 3:
-            image_array = image_array[:, :, 0]
+        # print(image_array.shape)
+
+        # if len(image_array.shape) == 3:
+        #     image_array = image_array[:, :, 0]
         mask_array = rgb_mask_to_label(mask_array)
 
         # # 获取所有非零的唯一值

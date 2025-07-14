@@ -11,9 +11,9 @@ from models import UNet
 
 label_to_color = {
     0: (0, 0, 0),  # 黑色：  background
-    # 1: (0, 255, 0),  # 绿色：  liugua
+    1: (0, 255, 0),  # 绿色：  liugua
     # 1: (255, 170, 0),   # 棕色：  huahen
-    1: (0, 255, 127),   # madian
+    # 1: (0, 255, 127),   # madian
     # 1: (255, 255, 0),   # qipao
     # 1: (238, 130, 238),   # yuyan
 }
@@ -26,11 +26,13 @@ def predict_image(model, image_path, output_dir, device, visualize=True):
     image = Image.open(image_path).convert('RGB')
     image_array = np.array(image)
     
-    if len(image_array.shape) == 3:
-        image_array = image_array[:, :, 0]
+    image_array = np.transpose(image_array, (2, 0, 1))
+    # print(image_array.shape)
+    # if len(image_array.shape) == 3:
+    #     image_array = image_array[:, :, 0]
     
     image_tensor = torch.from_numpy(image_array).float()  # (h, w)  =>  (1280, 1920)
-    image_tensor = image_tensor.unsqueeze(0).unsqueeze(0)   # (b, c, h, w) => (1, 1, 1280, 1920)
+    image_tensor = image_tensor.unsqueeze(0)   # (b, c, h, w) => (1, 1, 1280, 1920)
     image_tensor = image_tensor.to(device)
     
     with torch.no_grad():
@@ -58,15 +60,15 @@ def predict_image(model, image_path, output_dir, device, visualize=True):
 
 def get_args():
     parser = argparse.ArgumentParser(description="UNet模型推理")
-    parser.add_argument('--checkpoint', type=str, default="checkpoints_boluo/checkpoint_epoch199.pth", help="模型检查点路径")
+    parser.add_argument('--checkpoint', type=str, default="checkpoints_boluo/checkpoint_epoch299.pth", help="模型检查点路径")
     #parser.add_argument('--input', type=str, default="liugua/liugua/liugua/liugua_1.png", help="输入图像路径或包含图像的目录")
     # parser.add_argument('--input', type=str, default="/home/qinyihua/TrainData/HuahenData/huahen/huahen/huahen_3.png", help="输入图像路径或包含图像的目录")
     #parser.add_argument('--checkpoint', type=str, default="checkpoints/checkpoint_epoch499.pth", help="模型检查点路径")
-    parser.add_argument('--input', type=str, default="D:/Internship/Project_Vision/model_data_2/boluo_2.png", help="输入图像路径或包含图像的目录")
+    parser.add_argument('--input', type=str, default="dataset/boluo_test/boluo/boluo_014.png", help="输入图像路径或包含图像的目录")
     parser.add_argument('--output', type=str, default="./output", help="输出结果保存目录")
-    parser.add_argument('--n_channels', type=int, default=1, help="输入通道数")
+    parser.add_argument('--n_channels', type=int, default=3, help="输入通道数")
     parser.add_argument('--classes', type=int, default=2, help="类别数（包括背景）")
-    parser.add_argument('--base_channels', type=int, default=8, help="UNet基础通道数")
+    parser.add_argument('--base_channels', type=int, default=112, help="UNet基础通道数")
     parser.add_argument('--visualize', action='store_true', default=True, help="是否可视化分割结果")
     return parser.parse_args()
 

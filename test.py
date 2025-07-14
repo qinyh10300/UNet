@@ -54,7 +54,7 @@ def test(model, test_loader, criterion, device, amp):
 def get_args():
     parser = argparse.ArgumentParser(description="UNet模型推理")
     parser.add_argument('--checkpoint', type=str, default="checkpoints_qipao/checkpoint_epoch99.pth", help="模型检查点路径")
-    parser.add_argument('--n_channels', type=int, default=1, help="输入通道数")
+    parser.add_argument('--n_channels', type=int, default=3, help="输入通道数")
     parser.add_argument('--classes', type=int, default=2, help="类别数（包括背景）")
     parser.add_argument('--base_channels', type=int, default=8, help="UNet基础通道数")
     parser.add_argument('--alpha1', type=float, default=0.9, help='Hyperparameter Alpha 1')
