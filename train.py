@@ -159,7 +159,7 @@ def get_args():
     parser.add_argument('--random_seed', type=int, default=42, help="Random seed to spilce dataset")
     parser.add_argument('--val_percent', type=float, default=0.1, help="evaluation percent of total dataset")
     parser.add_argument('--amp', action='store_true', default=False, help='Use mixed precision')
-    parser.add_argument('--save_ckpt_frequency', type=int, default=100, help='How many epoches to save a checkpoint')
+    parser.add_argument('--save_ckpt_frequency', type=int, default=25, help='How many epoches to save a checkpoint')
     parser.add_argument('--dir_checkpoint', type=str, default="./checkpoints_boluo", help='Where to save checkpoints')
     parser.add_argument('--alpha1', type=float, default=0.9, help='Hyperparameter Alpha 1')
     parser.add_argument('--alpha2', type=float, default=0.1, help='Hyperparameter Alpha 2')
@@ -177,7 +177,7 @@ if __name__ == "__main__":
     # 记录超参数
     writer.add_text('Parameters', str(vars(args)))
 
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    device = torch.device('cuda:4' if torch.cuda.is_available() else 'cpu')
     print(f"device: {device}")
 
     full_dataset = CustomSegmentationDataset(root_dir='dataset')
