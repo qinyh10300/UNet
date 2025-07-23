@@ -1,0 +1,11 @@
+__pycache__
+
+# /output/
+
+/checkpoints_boluo/*
+# !/checkpoints_boluo/checkpoint_epoch424.pth
+# !/checkpoints_boluo/checkpoint_epoch449.pth
+# !/checkpoints_boluo/checkpoint_epoch474.pth
+# !/checkpoints_boluo/checkpoint_epoch499.pth
+
+# /runs/
