@@ -64,7 +64,7 @@ def get_args():
     #parser.add_argument('--input', type=str, default="liugua/liugua/liugua/liugua_1.png", help="输入图像路径或包含图像的目录")
     # parser.add_argument('--input', type=str, default="/home/qinyihua/TrainData/HuahenData/huahen/huahen/huahen_3.png", help="输入图像路径或包含图像的目录")
     #parser.add_argument('--checkpoint', type=str, default="checkpoints/checkpoint_epoch499.pth", help="模型检查点路径")
-    parser.add_argument('--input', type=str, default="dataset/boluo/boluo/boluo_281.png", help="输入图像路径或包含图像的目录")
+    parser.add_argument('--input', type=str, default="test_data/boluo_test/boluo/boluo_002.png", help="输入图像路径或包含图像的目录")
     parser.add_argument('--output', type=str, default="./output", help="输出结果保存目录")
     parser.add_argument('--n_channels', type=int, default=3, help="输入通道数")
     parser.add_argument('--classes', type=int, default=2, help="类别数（包括背景）")
